@@ -14,6 +14,9 @@
 		"ls_adls_covidreportingdl_properties_typeProperties_url": {
 			"value": "https://emilygcovidreportingdl.dfs.core.windows.net/"
 		},
+		"tr_ingest_population_date_properties_typeProperties_scope": {
+			"value": "/subscriptions/67a35cad-db86-4f13-a982-b0ca762688cb/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/emilygcovidreportingsav2"
+		},
 		"containerUri": {
 			"value": ""
 		},
