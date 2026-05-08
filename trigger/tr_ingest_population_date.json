@@ -1,0 +1,24 @@
+{
+	"name": "tr_ingest_population_date",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_ingestion_population_data",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/population/blobs/population",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/67a35cad-db86-4f13-a982-b0ca762688cb/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/emilygcovidreportingsav2",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
