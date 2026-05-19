@@ -1,0 +1,20 @@
+agent_task_id: AGT_POP_001
+task_type: generate_transform
+dataset_id: DS_REF_POPULATION_001
+target_language: pyspark
+target_runtime: fabric_spark_or_databricks
+
+input_contract_path: metadata/contracts/population_by_age_contract.yaml
+
+expected_outputs:
+  - transforms/pyspark/population_by_age_transform.py
+  - tests/unit/test_population_by_age_transform.py
+  - docs/mappings/population_by_age_mapping.md
+
+constraints:
+  - no hardcoded storage account names
+  - no secrets
+  - no runtime LLM calls
+  - transformation must be deterministic
+  - code must expose transform_population_by_age function
+  - output schema must match contract

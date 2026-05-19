@@ -1,0 +1,55 @@
+{
+  "agent_tasks": [
+    {
+      "agent_task_id": "AGT_POP_001",
+      "dataset_id": "DS_REF_POPULATION_001",
+      "task_type": "generate_transform",
+      "input_contract_path": "metadata/contracts/population_by_age_contract.yaml",
+      "output_repo_path": "transforms/pyspark/population_by_age_transform.py",
+      "target_language": "pyspark",
+      "target_runtime": "fabric_spark",
+      "status": "under_review",
+      "reviewer": "data_engineer",
+      "created_at": "2026-05-19T10:00:00Z",
+      "approved_at": null
+    }
+  ],
+  "generated_code_assets": [
+    {
+      "asset_id": "AST_POP_TRANSFORM_001",
+      "agent_task_id": "AGT_POP_001",
+      "dataset_id": "DS_REF_POPULATION_001",
+      "asset_type": "transform_module",
+      "repo_path": "transforms/pyspark/population_by_age_transform.py",
+      "code_hash": "pending",
+      "model_used": "configured_llm",
+      "prompt_version": "v0.1",
+      "review_status": "under_review",
+      "active_flag": false
+    },
+    {
+      "asset_id": "AST_POP_TESTS_001",
+      "agent_task_id": "AGT_POP_001",
+      "dataset_id": "DS_REF_POPULATION_001",
+      "asset_type": "unit_tests",
+      "repo_path": "tests/unit/test_population_by_age_transform.py",
+      "code_hash": "pending",
+      "model_used": "configured_llm",
+      "prompt_version": "v0.1",
+      "review_status": "under_review",
+      "active_flag": false
+    },
+    {
+      "asset_id": "AST_POP_MAPPING_DOC_001",
+      "agent_task_id": "AGT_POP_001",
+      "dataset_id": "DS_REF_POPULATION_001",
+      "asset_type": "mapping_documentation",
+      "repo_path": "docs/mappings/population_by_age_mapping.md",
+      "code_hash": "pending",
+      "model_used": "configured_llm",
+      "prompt_version": "v0.1",
+      "review_status": "under_review",
+      "active_flag": false
+    }
+  ]
+}
