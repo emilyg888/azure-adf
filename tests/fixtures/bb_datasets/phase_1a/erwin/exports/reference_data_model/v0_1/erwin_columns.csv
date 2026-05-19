@@ -1,0 +1,3 @@
+model_name,model_version,physical_object_name,logical_attribute_name,physical_column_name,data_type,length,precision,scale,nullable_flag,primary_key_flag,business_definition,domain_name,classification
+reference_data_model,v0_1,population_by_age,Composite age country key,indic_de_geo_time,string,80,,,false,false,Composite field containing age band and country code,reference,public
+reference_data_model,v0_1,population_by_age,2019 population percentage,2019,decimal,,4,2,true,false,Population percentage for calendar year 2019,percentage,public

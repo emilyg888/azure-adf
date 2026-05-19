@@ -1,0 +1,17 @@
+{
+  "name": "pl_platform_metadata_discovery",
+  "description": "Local ADLS/OneLake-style file discovery pipeline MVP.",
+  "parameters": {
+    "environment": "dev",
+    "dataset_id": "",
+    "discovery_path": ""
+  },
+  "activities": [
+    {"name": "ReadDiscoveryConfig", "type": "Lookup"},
+    {"name": "ForEachRegisteredObject", "type": "ForEach"},
+    {"name": "RunFileDiscovery", "type": "Notebook"},
+    {"name": "WriteDiscoveryObjectMetadata", "type": "Notebook"},
+    {"name": "WriteDiscoveryColumnMetadata", "type": "Notebook"},
+    {"name": "GenerateMetadataInventoryReport", "type": "Notebook"}
+  ]
+}

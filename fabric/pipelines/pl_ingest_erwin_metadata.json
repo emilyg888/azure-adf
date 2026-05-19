@@ -1,0 +1,21 @@
+{
+  "name": "pl_ingest_erwin_metadata",
+  "description": "Lightweight Erwin export ingestion pipeline MVP.",
+  "parameters": {
+    "environment": "dev",
+    "export_path": "",
+    "model_name": "",
+    "model_version": ""
+  },
+  "activities": [
+    {"name": "ReadErwinExportPath", "type": "SetVariable"},
+    {"name": "LoadErwinModel", "type": "Notebook"},
+    {"name": "LoadErwinObjects", "type": "Notebook"},
+    {"name": "LoadErwinColumns", "type": "Notebook"},
+    {"name": "LoadErwinMappings", "type": "Notebook"},
+    {"name": "ValidateRequiredColumns", "type": "Notebook"},
+    {"name": "CreateModelVersionId", "type": "SetVariable"},
+    {"name": "WriteStagingTables", "type": "Notebook"},
+    {"name": "WriteMetadataAcquisitionReport", "type": "Notebook"}
+  ]
+}

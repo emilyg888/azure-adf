@@ -1,0 +1,4 @@
+model_name,model_version,source_system_name,source_object_name,source_column_name,target_system_name,target_object_name,target_column_name,transformation_text,business_definition,classification
+reference_data_model,v0_1,ADLS Reference Data,population_by_age,indic_de_geo_time,Lakehouse Silver,population_by_age,country_code,"split by comma, take second element",Two character country code,public
+reference_data_model,v0_1,ADLS Reference Data,population_by_age,indic_de_geo_time,Lakehouse Silver,population_by_age,age_group,"split by comma, remove PC_ prefix from first element",Age group code,public
+reference_data_model,v0_1,ADLS Reference Data,population_by_age,2019,Lakehouse Silver,population_by_age,percentage_2019,remove alphabetic suffix and cast decimal,Population percentage for 2019,public
