@@ -1,5 +1,23 @@
 {
   "name": "pl_metadata_driven_ingestion",
-  "description": "TODO: Fabric pipeline for metadata-driven ingestion.",
-  "activities": []
+  "description": "Generic metadata-driven ingestion pipeline MVP.",
+  "parameters": {
+    "environment": "dev",
+    "dataset_id": "",
+    "dataset_group": "",
+    "run_mode": "manual",
+    "batch_date": "",
+    "full_refresh_flag": false
+  },
+  "activities": [
+    {"name": "InitialiseRun", "type": "SetVariable"},
+    {"name": "LookupDatasets", "type": "Lookup"},
+    {"name": "ForEachDataset", "type": "ForEach"},
+    {"name": "LookupSource", "type": "Lookup"},
+    {"name": "LookupTarget", "type": "Lookup"},
+    {"name": "ValidateMetadata", "type": "Notebook"},
+    {"name": "CopyData", "type": "Copy"},
+    {"name": "LandingValidation", "type": "Notebook"},
+    {"name": "WriteAudit", "type": "Notebook"}
+  ]
 }

@@ -1,7 +1,40 @@
-datasets:
-  - dataset_id: population_by_age
-    dataset_name: population_by_age
-    domain: demographics
-    owner: TODO
-    classification: public
-    is_active: true
+source_system:
+  source_system_id: SRC_ADLS_REF_001
+  source_system_name: ADLS Reference Data
+  source_type: ADLS
+  connection_name: conn_adls_reference
+  auth_method: managed_identity
+  owner: data_platform
+  active_flag: true
+
+dataset:
+  dataset_id: DS_REF_POPULATION_001
+  dataset_name: population_by_age
+  business_domain: reference_data
+  source_system_id: SRC_ADLS_REF_001
+  data_owner: reference_data_owner
+  data_steward: reference_data_steward
+  sensitivity_class: public
+  load_frequency: on_demand
+  load_type: full
+  active_flag: true
+
+dataset_source:
+  dataset_source_id: DSS_REF_POPULATION_001
+  dataset_id: DS_REF_POPULATION_001
+  source_object_type: file
+  source_path: /raw/population/population_by_age.tsv
+  source_format: csv
+  source_delimiter: tab
+  active_flag: true
+
+dataset_target:
+  target_id: TGT_RAW_POPULATION_001
+  dataset_id: DS_REF_POPULATION_001
+  target_platform: ADLS
+  target_storage_type: file
+  target_format: csv
+  target_path: /landing/reference/population_by_age/population_by_age.tsv
+  write_mode: overwrite
+  write_strategy: full_load
+  active_flag: true

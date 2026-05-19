@@ -1,9 +1,16 @@
 CREATE TABLE IF NOT EXISTS md_pipeline_audit_log (
-    audit_run_id STRING,
-    pipeline_name STRING,
+    run_id STRING,
     dataset_id STRING,
+    pipeline_name STRING,
+    activity_name STRING,
     status STRING,
+    source_record_count BIGINT,
+    target_record_count BIGINT,
+    rejected_record_count BIGINT,
+    warning_count BIGINT,
+    error_message STRING,
+    code_version STRING,
+    metadata_version STRING,
     started_at TIMESTAMP,
-    ended_at TIMESTAMP,
-    message STRING
+    completed_at TIMESTAMP
 );

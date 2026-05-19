@@ -1,0 +1,64 @@
+{
+  "metadata_version": "phase_1_mvp",
+  "source_systems": [
+    {
+      "source_system_id": "SRC_ADLS_REF_001",
+      "source_system_name": "ADLS Reference Data",
+      "source_type": "ADLS",
+      "connection_name": "conn_adls_reference",
+      "auth_method": "managed_identity",
+      "owner": "data_platform",
+      "active_flag": true
+    }
+  ],
+  "datasets": [
+    {
+      "dataset_id": "DS_REF_POPULATION_001",
+      "dataset_name": "population_by_age",
+      "business_domain": "reference_data",
+      "source_system_id": "SRC_ADLS_REF_001",
+      "data_owner": "reference_data_owner",
+      "data_steward": "reference_data_steward",
+      "sensitivity_class": "public",
+      "load_frequency": "on_demand",
+      "load_type": "full",
+      "active_flag": true
+    }
+  ],
+  "dataset_sources": [
+    {
+      "dataset_source_id": "DSS_REF_POPULATION_001",
+      "dataset_id": "DS_REF_POPULATION_001",
+      "source_object_type": "file",
+      "source_database": "",
+      "source_schema": "",
+      "source_object": "population_by_age.tsv",
+      "source_path": "/raw/population/population_by_age.tsv",
+      "source_format": "csv",
+      "source_delimiter": "tab",
+      "watermark_column": "",
+      "incremental_filter": "",
+      "active_flag": true
+    }
+  ],
+  "dataset_targets": [
+    {
+      "target_id": "TGT_RAW_POPULATION_001",
+      "dataset_id": "DS_REF_POPULATION_001",
+      "target_platform": "ADLS",
+      "target_storage_type": "file",
+      "target_format": "csv",
+      "target_connection_name": "",
+      "target_database": "",
+      "target_schema": "",
+      "target_object": "population_by_age.tsv",
+      "target_path": "/landing/reference/population_by_age/population_by_age.tsv",
+      "write_mode": "overwrite",
+      "write_strategy": "full_load",
+      "partition_columns": "",
+      "primary_key_columns": "",
+      "watermark_column": "",
+      "active_flag": true
+    }
+  ]
+}
