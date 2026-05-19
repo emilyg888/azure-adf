@@ -1,0 +1,70 @@
+dataset_id: DS_REF_POPULATION_001
+dataset_name: population_by_age
+contract_version: "0.1"
+
+inputs:
+  - name: raw_population
+    role: primary
+    format: csv
+    delimiter: tab
+    path: /raw/population/population_by_age.tsv
+
+lookups:
+  - name: dim_country
+    format: csv
+    delimiter: comma
+    path: /lookup/dim_country.csv
+    join_key:
+      source: country_code
+      lookup: country_code_2_digit
+
+target:
+  platform: file
+  storage_type: file
+  format: csv
+  schema: silver
+  object: population_by_age
+  path: /processed/population_by_age
+  write_mode: overwrite
+  write_strategy: full_load
+
+mappings:
+  - source_column: indic_de_geo_time
+    target_column: country_code
+    target_data_type: string
+    nullable: false
+    transformation_rule: extract second element after splitting by comma
+  - source_column: indic_de_geo_time
+    target_column: age_group
+    target_data_type: string
+    nullable: false
+    transformation_rule: extract first element after splitting by comma and remove PC_ prefix
+  - source_column: "2019"
+    target_column: percentage_2019
+    target_data_type: decimal(4,2)
+    nullable: true
+    transformation_rule: remove alphabetic characters and cast to decimal
+
+transformations:
+  - sequence: 10
+    name: extract_age_group
+    type: derive_column
+  - sequence: 20
+    name: extract_country_code
+    type: derive_column
+  - sequence: 30
+    name: clean_percentage
+    type: regex_clean_cast
+  - sequence: 40
+    name: pivot_age_group
+    type: pivot
+  - sequence: 50
+    name: join_country_lookup
+    type: join
+
+tests:
+  required:
+    - schema_validation
+    - country_code_not_null
+    - output_row_count_greater_than_zero
+    - expected_age_group_columns_present

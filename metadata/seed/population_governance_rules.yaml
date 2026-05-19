@@ -1,0 +1,6 @@
+governance_rules:
+  - dataset_id: population_by_age
+    rule_name: population_non_negative
+    rule_type: data_quality
+    severity: high
+    rule_expression: population >= 0

@@ -1,0 +1,5 @@
+{
+  "name": "pl_metadata_driven_ingestion",
+  "description": "TODO: Fabric pipeline for metadata-driven ingestion.",
+  "activities": []
+}

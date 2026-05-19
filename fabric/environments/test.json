@@ -1,0 +1,12 @@
+{
+  "environment": "test",
+  "metadata_database": "md_framework_test",
+  "raw_container": "raw",
+  "landing_container": "landing",
+  "processed_container": "processed",
+  "lookup_container": "lookup",
+  "audit_container": "audit",
+  "default_target_platform": "file",
+  "key_vault_name": "kv-md-framework-test",
+  "bb_dataset_root": "../bb_datasets"
+}

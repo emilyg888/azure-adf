@@ -1,0 +1,34 @@
+dataset_id: ""
+contract_version: "0.1"
+
+inputs:
+  - name: ""
+    type: ""
+    path: ""
+    format: ""
+
+lookups: []
+
+outputs:
+  - name: ""
+    target_platform: ""
+    target_object: ""
+
+mappings:
+  - source_column: ""
+    target_column: ""
+    target_data_type: ""
+    nullable: true
+    transformation_rule: ""
+
+transformations:
+  - sequence: 10
+    name: ""
+    type: ""
+    expression: ""
+
+tests:
+  required:
+    - schema_validation
+    - row_count_check
+    - mandatory_column_check

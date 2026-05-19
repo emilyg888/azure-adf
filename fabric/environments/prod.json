@@ -1,0 +1,12 @@
+{
+  "environment": "prod",
+  "metadata_database": "md_framework_prod",
+  "raw_container": "raw",
+  "landing_container": "landing",
+  "processed_container": "processed",
+  "lookup_container": "lookup",
+  "audit_container": "audit",
+  "default_target_platform": "delta",
+  "key_vault_name": "kv-md-framework-prod",
+  "bb_dataset_root": ""
+}

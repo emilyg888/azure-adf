@@ -1,0 +1,36 @@
+dataset_id: ""
+dataset_name: ""
+business_domain: ""
+description: ""
+data_owner: ""
+data_steward: ""
+load_type: "full"
+frequency: "on_demand"
+
+source:
+  source_system_id: ""
+  source_type: ""
+  object_type: ""
+  database: ""
+  schema: ""
+  object: ""
+  path: ""
+  format: ""
+  delimiter: ""
+
+target:
+  target_platform: ""
+  target_storage_type: ""
+  target_format: ""
+  database: ""
+  schema: ""
+  object: ""
+  path: ""
+  write_mode: ""
+  write_strategy: ""
+
+governance:
+  dq_required: true
+  pii_classification_required: false
+  lineage_required: true
+  certification_required: false

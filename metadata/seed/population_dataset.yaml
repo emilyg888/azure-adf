@@ -1,0 +1,7 @@
+datasets:
+  - dataset_id: population_by_age
+    dataset_name: population_by_age
+    domain: demographics
+    owner: TODO
+    classification: public
+    is_active: true

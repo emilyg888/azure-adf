@@ -1,0 +1,11 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - script: echo "TODO: add CI checks"
+    displayName: Run CI checks

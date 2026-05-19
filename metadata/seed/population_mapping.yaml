@@ -1,0 +1,11 @@
+mappings:
+  - dataset_id: population_by_age
+    source_column: age
+    target_column: age
+    target_data_type: integer
+    nullable: false
+  - dataset_id: population_by_age
+    source_column: population
+    target_column: population
+    target_data_type: long
+    nullable: false
