@@ -1,8 +1,11 @@
 CREATE TABLE IF NOT EXISTS md_transformation_rule (
-    transformation_rule_id STRING,
+    rule_id STRING,
     dataset_id STRING,
     rule_name STRING,
     rule_type STRING,
+    source_column STRING,
+    target_column STRING,
     rule_expression STRING,
-    execution_order INT
+    rule_sequence INT,
+    enabled_flag BOOLEAN
 );

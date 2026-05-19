@@ -1,0 +1,82 @@
+{
+  "metadata_version": "phase_2_mvp",
+  "schema_mappings": [
+    {
+      "mapping_id": "MAP_POP_001",
+      "dataset_id": "DS_REF_POPULATION_001",
+      "source_column": "indic_de_geo_time",
+      "target_column": "country_code",
+      "target_data_type": "string",
+      "nullable_flag": false,
+      "primary_key_flag": false,
+      "business_definition": "Two character country code extracted from composite source field.",
+      "erwin_entity_name": "Population by Age",
+      "erwin_attribute_name": "Composite age country key",
+      "transformation_rule_id": "RULE_POP_020",
+      "active_flag": true
+    },
+    {
+      "mapping_id": "MAP_POP_002",
+      "dataset_id": "DS_REF_POPULATION_001",
+      "source_column": "indic_de_geo_time",
+      "target_column": "age_group",
+      "target_data_type": "string",
+      "nullable_flag": false,
+      "primary_key_flag": false,
+      "business_definition": "Age group extracted from composite source field.",
+      "erwin_entity_name": "Population by Age",
+      "erwin_attribute_name": "Composite age country key",
+      "transformation_rule_id": "RULE_POP_010",
+      "active_flag": true
+    },
+    {
+      "mapping_id": "MAP_POP_003",
+      "dataset_id": "DS_REF_POPULATION_001",
+      "source_column": "2019",
+      "target_column": "percentage_2019",
+      "target_data_type": "decimal(4,2)",
+      "nullable_flag": true,
+      "primary_key_flag": false,
+      "business_definition": "Population percentage for 2019.",
+      "erwin_entity_name": "Population by Age",
+      "erwin_attribute_name": "2019 population percentage",
+      "transformation_rule_id": "RULE_POP_030",
+      "active_flag": true
+    }
+  ],
+  "transformation_rules": [
+    {
+      "rule_id": "RULE_POP_010",
+      "dataset_id": "DS_REF_POPULATION_001",
+      "rule_name": "extract_age_group",
+      "rule_type": "derive_column",
+      "source_column": "indic_de_geo_time",
+      "target_column": "age_group",
+      "rule_expression": "split by comma, take first element, remove PC_ prefix",
+      "rule_sequence": 10,
+      "enabled_flag": true
+    },
+    {
+      "rule_id": "RULE_POP_020",
+      "dataset_id": "DS_REF_POPULATION_001",
+      "rule_name": "extract_country_code",
+      "rule_type": "derive_column",
+      "source_column": "indic_de_geo_time",
+      "target_column": "country_code",
+      "rule_expression": "split by comma, take second element",
+      "rule_sequence": 20,
+      "enabled_flag": true
+    },
+    {
+      "rule_id": "RULE_POP_030",
+      "dataset_id": "DS_REF_POPULATION_001",
+      "rule_name": "clean_percentage",
+      "rule_type": "regex_clean_cast",
+      "source_column": "2019",
+      "target_column": "percentage_2019",
+      "rule_expression": "remove alphabetic characters and cast to decimal",
+      "rule_sequence": 30,
+      "enabled_flag": true
+    }
+  ]
+}

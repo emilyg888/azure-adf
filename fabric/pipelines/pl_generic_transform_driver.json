@@ -1,0 +1,21 @@
+{
+  "name": "pl_generic_transform_driver",
+  "description": "Generic contract-driven transformation pipeline MVP.",
+  "parameters": {
+    "environment": "dev",
+    "dataset_id": "",
+    "run_id": "",
+    "contract_path": "",
+    "batch_date": ""
+  },
+  "activities": [
+    {"name": "LoadEnvironmentConfig", "type": "Notebook"},
+    {"name": "LoadDatasetMetadata", "type": "Lookup"},
+    {"name": "LoadTransformationContract", "type": "Notebook"},
+    {"name": "ReadInputData", "type": "Notebook"},
+    {"name": "RunTransformation", "type": "Notebook"},
+    {"name": "ValidateOutputSchema", "type": "Notebook"},
+    {"name": "WriteTarget", "type": "Notebook"},
+    {"name": "WriteTransformationAudit", "type": "Notebook"}
+  ]
+}
