@@ -1,0 +1,127 @@
+{
+  "metadata_version": "element_fleet_mvp_0.1",
+  "source_system_id": "SRC_ELEMENT_FLEET_SYNTH_001",
+  "source_system_name": "Element Fleet Services Synthetic Dataset",
+  "conformed_config": {
+    "dimensions": {
+      "clients.csv": {
+        "target_table": "DIM_CLIENT",
+        "scd_type": 2,
+        "extract_mode": "snapshot_full",
+        "missing_record_action": "soft_delete"
+      },
+      "vehicles.csv": {
+        "target_table": "DIM_VEHICLE",
+        "scd_type": 2,
+        "extract_mode": "snapshot_full",
+        "missing_record_action": "soft_delete"
+      },
+      "maintenance_vendors.csv": {
+        "target_table": "DIM_SUPPLIER",
+        "scd_type": 2,
+        "extract_mode": "snapshot_full",
+        "missing_record_action": "soft_delete"
+      },
+      "fuel_cards.csv": {
+        "target_table": "DIM_FUEL_CARD",
+        "scd_type": 2,
+        "extract_mode": "snapshot_full",
+        "missing_record_action": "soft_delete"
+      }
+    },
+    "append_only_events": {
+      "fuel_card_transactions.csv": {
+        "target_table": "FACT_FUEL_TRANSACTION",
+        "merge_key": "fuel_transaction_id",
+        "expire_missing_records": false
+      },
+      "telematics_daily.csv": {
+        "target_table": "FACT_TELEMATICS_DAILY_SUMMARY",
+        "merge_key": "telematics_event_id",
+        "expire_missing_records": false
+      },
+      "driver_app_events.csv": {
+        "target_table": "FACT_DRIVER_APP_DAILY_SUMMARY",
+        "merge_key": "driver_app_event_id",
+        "expire_missing_records": false
+      }
+    }
+  },
+  "table_config": {
+    "clients.csv": {
+      "dataset_id": "DS_FLEET_CLIENTS_001",
+      "primary_key": "client_id",
+      "source_record_pattern": "mutable_versioned"
+    },
+    "vehicles.csv": {
+      "dataset_id": "DS_FLEET_VEHICLES_001",
+      "primary_key": "vehicle_id",
+      "source_record_pattern": "mutable_versioned"
+    },
+    "leasing_contracts.csv": {
+      "dataset_id": "DS_FLEET_LEASING_CONTRACTS_001",
+      "primary_key": "lease_id",
+      "source_record_pattern": "mutable_versioned"
+    },
+    "maintenance_vendors.csv": {
+      "dataset_id": "DS_FLEET_MAINTENANCE_VENDORS_001",
+      "primary_key": "vendor_id",
+      "source_record_pattern": "mutable_versioned"
+    },
+    "maintenance_work_orders.csv": {
+      "dataset_id": "DS_FLEET_MAINTENANCE_WORK_ORDERS_001",
+      "primary_key": "work_order_id",
+      "source_record_pattern": "mutable_versioned"
+    },
+    "fuel_cards.csv": {
+      "dataset_id": "DS_FLEET_FUEL_CARDS_001",
+      "primary_key": "fuel_card_id",
+      "source_record_pattern": "mutable_versioned"
+    },
+    "fuel_card_transactions.csv": {
+      "dataset_id": "DS_FLEET_FUEL_TXN_001",
+      "primary_key": "fuel_transaction_id",
+      "source_record_pattern": "immutable_event"
+    },
+    "telematics_daily.csv": {
+      "dataset_id": "DS_FLEET_TELEMATICS_DAILY_001",
+      "primary_key": "telematics_event_id",
+      "source_record_pattern": "immutable_event"
+    },
+    "insurance_claims.csv": {
+      "dataset_id": "DS_FLEET_INSURANCE_CLAIMS_001",
+      "primary_key": "claim_id",
+      "source_record_pattern": "mutable_versioned"
+    },
+    "vehicle_registration_events.csv": {
+      "dataset_id": "DS_FLEET_REGISTRATION_EVENTS_001",
+      "primary_key": "registration_event_id",
+      "source_record_pattern": "mutable_versioned"
+    },
+    "finance_billing_invoices.csv": {
+      "dataset_id": "DS_FLEET_BILLING_INVOICES_001",
+      "primary_key": "invoice_id",
+      "source_record_pattern": "mutable_versioned"
+    },
+    "crm_client_portal_events.csv": {
+      "dataset_id": "DS_FLEET_PORTAL_EVENTS_001",
+      "primary_key": "portal_event_id",
+      "source_record_pattern": "mutable_versioned"
+    },
+    "driver_app_events.csv": {
+      "dataset_id": "DS_FLEET_DRIVER_APP_EVENTS_001",
+      "primary_key": "driver_app_event_id",
+      "source_record_pattern": "immutable_event"
+    },
+    "ev_charging_sessions.csv": {
+      "dataset_id": "DS_FLEET_EV_CHARGING_SESSIONS_001",
+      "primary_key": "charging_session_id",
+      "source_record_pattern": "mutable_versioned"
+    },
+    "remarketing_auction_results.csv": {
+      "dataset_id": "DS_FLEET_REMARKETING_AUCTION_001",
+      "primary_key": "remarketing_event_id",
+      "source_record_pattern": "mutable_versioned"
+    }
+  }
+}
