@@ -1,0 +1,87 @@
+-- Element Fleet Customer 360 rebuild order.
+--
+-- This file is the operational checklist for rebuilding the Snowflake layers
+-- after uploading `.local/element_fleet_sit_adls/staging` to the ADLS stage.
+--
+-- Execute these SQL artifacts in order:
+--
+-- 1. metadata/ddl/element_fleet_snowflake_sit_setup.sql
+--    Recreates STG_FLEET.CLIENTS_EXT, rebuilds CONFORMED.DIM_CLIENT from
+--    2026-05-25 and 2026-05-26 full extracts, and preserves ABN/domain/address.
+--
+-- 2. metadata/ddl/element_fleet_snowflake_stream_dim_vehicle.sql
+--    Recreates STG_FLEET.VEHICLES_EXT and rebuilds CONFORMED.DIM_VEHICLE from
+--    2026-05-25 and 2026-05-26 full extracts, preserving VIN/plate/device IDs.
+--
+-- 3. metadata/ddl/element_fleet_snowflake_staging_identity_inputs.sql
+--    Rebuilds STG_FLEET transient inputs for leasing, fuel cards, telematics,
+--    maintenance, claims, invoices, portal events, and EV charging.
+--
+-- 4. metadata/ddl/element_fleet_customer360_identity_resolution.sql
+--    Creates the IDENTITY, GOLDEN, GOLD, GOVERNANCE, and SEMANTIC objects plus
+--    the IDENTITY.BUILD_CUSTOMER360_IDENTITY procedure.
+--
+-- 5. Run the build procedure and validation queries below.
+
+USE ROLE ACCOUNTADMIN;
+USE WAREHOUSE FLEET_MVP_SIT_WH;
+USE DATABASE FLEET_MVP_SIT;
+
+CALL IDENTITY.BUILD_CUSTOMER360_IDENTITY('2026-05-26', 'RUN_CUSTOMER360_FULL_20260526');
+
+INSERT INTO AUDIT.SIT_CHECK_RESULTS (CHECK_NAME, CHECK_VALUE, EXPECTED_VALUE, CHECK_STATUS)
+SELECT
+  'CUSTOMER360_STD_CUSTOMER_ROWS',
+  COUNT(*),
+  (SELECT COUNT(*) FROM CONFORMED.DIM_CLIENT WHERE IS_CURRENT = TRUE AND COALESCE(DELETED_FLAG, FALSE) = FALSE),
+  IFF(
+    COUNT(*) = (SELECT COUNT(*) FROM CONFORMED.DIM_CLIENT WHERE IS_CURRENT = TRUE AND COALESCE(DELETED_FLAG, FALSE) = FALSE),
+    'passed',
+    'failed'
+  )
+FROM IDENTITY.STD_CUSTOMER;
+
+INSERT INTO AUDIT.SIT_CHECK_RESULTS (CHECK_NAME, CHECK_VALUE, EXPECTED_VALUE, CHECK_STATUS)
+SELECT
+  'CUSTOMER360_STD_VEHICLE_ROWS',
+  COUNT(*),
+  (SELECT COUNT(*) FROM CONFORMED.DIM_VEHICLE WHERE IS_CURRENT = TRUE AND COALESCE(DELETED_FLAG, FALSE) = FALSE),
+  IFF(
+    COUNT(*) = (SELECT COUNT(*) FROM CONFORMED.DIM_VEHICLE WHERE IS_CURRENT = TRUE AND COALESCE(DELETED_FLAG, FALSE) = FALSE),
+    'passed',
+    'failed'
+  )
+FROM IDENTITY.STD_VEHICLE;
+
+INSERT INTO AUDIT.SIT_CHECK_RESULTS (CHECK_NAME, CHECK_VALUE, EXPECTED_VALUE, CHECK_STATUS)
+SELECT
+  'CUSTOMER360_IDENTITY_FIELDS_POPULATED',
+  COUNT(*),
+  0,
+  IFF(COUNT(*) = 0, 'passed', 'failed')
+FROM (
+  SELECT SOURCE_CUSTOMER_ID AS ENTITY_ID
+  FROM IDENTITY.STD_CUSTOMER
+  WHERE COALESCE(STD_ABN, '') = ''
+     OR COALESCE(STD_EMAIL_DOMAIN, '') = ''
+     OR COALESCE(STD_ADDRESS_LINE_1, '') = ''
+  UNION ALL
+  SELECT SOURCE_VEHICLE_ID AS ENTITY_ID
+  FROM IDENTITY.STD_VEHICLE
+  WHERE COALESCE(STD_VIN, '') = ''
+     OR COALESCE(STD_REGISTRATION_PLATE, '') = ''
+     OR COALESCE(STD_TELEMATICS_DEVICE_ID, '') = ''
+);
+
+INSERT INTO AUDIT.SIT_CHECK_RESULTS (CHECK_NAME, CHECK_VALUE, EXPECTED_VALUE, CHECK_STATUS)
+SELECT
+  'CUSTOMER360_SEMANTIC_ROWS',
+  COUNT(*),
+  (SELECT COUNT(*) FROM GOLDEN.GOLDEN_CUSTOMER),
+  IFF(COUNT(*) = (SELECT COUNT(*) FROM GOLDEN.GOLDEN_CUSTOMER), 'passed', 'failed')
+FROM SEMANTIC.CUSTOMER_360;
+
+SELECT *
+FROM AUDIT.SIT_CHECK_RESULTS
+WHERE CHECK_NAME LIKE 'CUSTOMER360%'
+ORDER BY CHECKED_AT, CHECK_NAME;
