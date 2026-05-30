@@ -1,0 +1,19 @@
+snowflake:
+  secret_scope: fleet-snowflake
+  account_secret_key: account
+  user_secret_key: user
+  private_key_secret_key: private_key
+  private_key_passphrase_secret_key: private_key_passphrase
+  role_secret_key: role
+  warehouse_secret_key: warehouse
+  database: FLEET_MVP_SIT
+  schema: IDENTITY
+
+writeback:
+  staging_tables:
+    CUSTOMER: IDENTITY.STG_CUSTOMER_MATCH_SCORE_WRITEBACK
+    VEHICLE: IDENTITY.STG_VEHICLE_MATCH_SCORE_WRITEBACK
+    DEVICE_VEHICLE: IDENTITY.STG_DEVICE_VEHICLE_MATCH_SCORE_WRITEBACK
+    ACCOUNT_CUSTOMER: IDENTITY.STG_ACCOUNT_CUSTOMER_MATCH_SCORE_WRITEBACK
+  merge_procedure: IDENTITY.MERGE_MATCH_SCORE_WRITEBACK
+  decision_procedure: IDENTITY.APPLY_MATCH_DECISION_POLICY

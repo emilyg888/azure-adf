@@ -1,0 +1,26 @@
+bundle:
+  name: candidate-matching
+
+include:
+  - ../../jobs/candidate_matching_job.yml
+
+sync:
+  paths:
+    - ../..
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      profile: fleet-dev-active
+
+variables:
+  snowflake_secret_scope:
+    default: fleet-snowflake
+
+  snowflake_database:
+    default: FLEET_MVP_SIT
+
+  snowflake_schema:
+    default: IDENTITY

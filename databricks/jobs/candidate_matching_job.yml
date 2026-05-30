@@ -1,0 +1,12 @@
+resources:
+  jobs:
+    candidate_matching_score_writeback:
+      name: candidate-matching-score-writeback
+      tasks:
+        - task_key: score_candidates
+          notebook_task:
+            notebook_path: ../notebooks/candidate_match_scoring.py
+            base_parameters:
+              snowflake_secret_scope: ${var.snowflake_secret_scope}
+              snowflake_database: ${var.snowflake_database}
+              snowflake_schema: ${var.snowflake_schema}
