@@ -13,7 +13,7 @@ from azure.storage.blob import BlobServiceClient, ContainerSasPermissions, gener
 DEFAULT_ACCOUNT_NAME = "emilygcovidreportingdl"
 DEFAULT_TENANT_ID = "4255f836-8ff1-4e78-a7b9-602e32708e78"
 DEFAULT_FILESYSTEM = "fabric-foundry-sit"
-DEFAULT_OUTPUT = Path(".local/element_fleet_sas_stage.sql")
+DEFAULT_OUTPUT = Path(".local/fleet_sas_stage.sql")
 
 
 def main() -> None:

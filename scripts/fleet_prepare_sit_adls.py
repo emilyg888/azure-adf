@@ -1,4 +1,4 @@
-"""Prepare Element Fleet SIT files for ADLS STAGING upload.
+"""Prepare Fleet SIT files for ADLS STAGING upload.
 
 The local pipeline writes CSV files as a lightweight stand-in for ADLS Parquet.
 This script converts those staged CSV outputs into Parquet using the same
@@ -15,12 +15,12 @@ import pandas as pd
 
 
 DEFAULT_INPUT_ROOT = Path(".local")
-DEFAULT_OUTPUT_ROOT = Path(".local/element_fleet_sit_adls")
-FULL_RUN_TEMPLATE = "element_fleet_full_{date_compact}"
+DEFAULT_OUTPUT_ROOT = Path(".local/fleet_sit_adls")
+FULL_RUN_TEMPLATE = "fleet_full_{date_compact}"
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Prepare Element Fleet SIT Parquet files.")
+    parser = argparse.ArgumentParser(description="Prepare Fleet SIT Parquet files.")
     parser.add_argument("--input-root", type=Path, default=DEFAULT_INPUT_ROOT)
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT_ROOT)
     parser.add_argument("--source-date", action="append", required=True, help="Source date, e.g. 2026-05-25")

@@ -3,13 +3,13 @@ from pathlib import Path
 import pytest
 
 
-SQL_PATH = Path("metadata/ddl/element_fleet_customer360_identity_resolution.sql")
-SIT_SQL_PATH = Path("metadata/ddl/element_fleet_snowflake_sit_setup.sql")
-VEHICLE_STREAM_SQL_PATH = Path("metadata/ddl/element_fleet_snowflake_stream_dim_vehicle.sql")
-STAGING_INPUTS_SQL_PATH = Path("metadata/ddl/element_fleet_snowflake_staging_identity_inputs.sql")
-REBUILD_ORDER_SQL_PATH = Path("metadata/ddl/element_fleet_customer360_rebuild_order.sql")
-LOCAL_BUILDER_PATH = Path("scripts/element_fleet_build_customer360_local.py")
-SOURCE_METADATA_PATH = Path("/Users/emilygao/LocalDocuments/Projects/bb_datasets/element-fleet-services/metadata.json")
+SQL_PATH = Path("metadata/ddl/fleet_customer360_identity_resolution.sql")
+SIT_SQL_PATH = Path("metadata/ddl/fleet_snowflake_sit_setup.sql")
+VEHICLE_STREAM_SQL_PATH = Path("metadata/ddl/fleet_snowflake_stream_dim_vehicle.sql")
+STAGING_INPUTS_SQL_PATH = Path("metadata/ddl/fleet_snowflake_staging_identity_inputs.sql")
+REBUILD_ORDER_SQL_PATH = Path("metadata/ddl/fleet_customer360_rebuild_order.sql")
+LOCAL_BUILDER_PATH = Path("scripts/fleet_build_customer360_local.py")
+SOURCE_METADATA_PATH = Path("/Users/emilygao/LocalDocuments/Projects/bb_datasets/fleet-services/metadata.json")
 
 
 def test_customer360_identity_resolution_artifact_contains_required_layers():
@@ -75,7 +75,7 @@ def test_customer360_consumes_exposed_fleet_identity_columns():
 
 def test_bb_dataset_metadata_exposes_customer360_inputs():
     if not SOURCE_METADATA_PATH.exists():
-        pytest.skip("Element Fleet bb_datasets source is not present on this machine")
+        pytest.skip("Fleet bb_datasets source is not present on this machine")
 
     import json
 
@@ -126,9 +126,9 @@ def test_customer360_rebuild_order_and_local_builder_exist():
 
     assert "CALL IDENTITY.BUILD_CUSTOMER360_IDENTITY" in rebuild_sql
     assert "CUSTOMER360_IDENTITY_FIELDS_POPULATED" in rebuild_sql
-    assert "element_fleet_snowflake_sit_setup.sql" in rebuild_sql
-    assert "element_fleet_snowflake_stream_dim_vehicle.sql" in rebuild_sql
-    assert "element_fleet_snowflake_staging_identity_inputs.sql" in rebuild_sql
+    assert "fleet_snowflake_sit_setup.sql" in rebuild_sql
+    assert "fleet_snowflake_stream_dim_vehicle.sql" in rebuild_sql
+    assert "fleet_snowflake_staging_identity_inputs.sql" in rebuild_sql
     assert "merge_scd2_dimension" in local_builder
     assert "identity_std_customer" in local_builder
     assert "semantic_customer_360" in local_builder

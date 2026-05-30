@@ -1,4 +1,4 @@
--- Element Fleet Services Fuel Anomaly Detection feature-layer MVP.
+-- Fleet Services Fuel Anomaly Detection feature-layer MVP.
 -- Scope: FEATURES layer only. No GOLD or SEMANTIC objects are created here.
 --
 -- Input contract:

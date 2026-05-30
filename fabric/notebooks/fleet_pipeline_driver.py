@@ -1,4 +1,4 @@
-"""Element Fleet Services RAW and STAGING pipeline driver."""
+"""Fleet Services RAW and STAGING pipeline driver."""
 
 from __future__ import annotations
 
@@ -22,12 +22,12 @@ from framework.ingestion.staging_processor import (
 )
 
 
-SOURCE_ROOT = Path("/Users/emilygao/LocalDocuments/Projects/bb_datasets/element-fleet-services")
-DEFAULT_OUTPUT_ROOT = ROOT / ".local" / "element_fleet_pipeline"
-DEFAULT_PIPELINE_METADATA_PATH = ROOT / "metadata" / "seed" / "element_fleet_pipeline_metadata.json"
+SOURCE_ROOT = Path("/Users/emilygao/LocalDocuments/Projects/bb_datasets/fleet-services")
+DEFAULT_OUTPUT_ROOT = ROOT / ".local" / "fleet_pipeline"
+DEFAULT_PIPELINE_METADATA_PATH = ROOT / "metadata" / "seed" / "fleet_pipeline_metadata.json"
 
 
-def run_element_fleet_pipeline(
+def run_fleet_pipeline(
     *,
     source_root: str | Path = SOURCE_ROOT,
     output_root: str | Path = DEFAULT_OUTPUT_ROOT,
@@ -40,7 +40,7 @@ def run_element_fleet_pipeline(
     run_id: str | None = None,
     audit_path: str | Path | None = None,
 ) -> list[dict]:
-    """Run the local Element Fleet RAW and STAGING pipeline."""
+    """Run the local Fleet RAW and STAGING pipeline."""
 
     resolved_source_root = Path(source_root)
     resolved_output_root = Path(output_root)
@@ -49,7 +49,7 @@ def run_element_fleet_pipeline(
     source_system_id = pipeline_metadata["source_system_id"]
     active_batch_date = batch_date or datetime.now(UTC).date().isoformat()
     active_run_id = run_id or f"RUN_{datetime.now(UTC).strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}"
-    resolved_audit_path = Path(audit_path or resolved_output_root / "audit" / "element_fleet_pipeline_audit.jsonl")
+    resolved_audit_path = Path(audit_path or resolved_output_root / "audit" / "fleet_pipeline_audit.jsonl")
     audit = AuditLogger(resolved_audit_path)
 
     if load_type not in {"full", "delta"}:
@@ -103,7 +103,7 @@ def run_element_fleet_pipeline(
                 {
                     **result,
                     "run_id": active_run_id,
-                    "pipeline_name": "pl_element_fleet_raw_to_staging",
+                    "pipeline_name": "pl_fleet_raw_to_staging",
                     "activity_name": "RawAndStage",
                     "batch_date": active_batch_date,
                     "load_type": load_type,
@@ -118,7 +118,7 @@ def run_element_fleet_pipeline(
                     "run_id": active_run_id,
                     "dataset_id": contract.dataset_id,
                     "table_name": contract.table_name,
-                    "pipeline_name": "pl_element_fleet_raw_to_staging",
+                    "pipeline_name": "pl_fleet_raw_to_staging",
                     "activity_name": "RawAndStage",
                     "status": "FAILED",
                     "error_message": str(exc),
@@ -166,7 +166,7 @@ def main() -> None:
     parser.add_argument("--run-id", default=None)
     parser.add_argument("--audit-path", default=None)
     args = parser.parse_args()
-    results = run_element_fleet_pipeline(
+    results = run_fleet_pipeline(
         source_root=args.source_root,
         output_root=args.output_root,
         pipeline_metadata_path=args.pipeline_metadata_path,

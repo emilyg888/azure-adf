@@ -330,9 +330,9 @@ def _copy_to_raw(
     target = (
         output_root
         / "raw"
-        / "source_system=element_fleet_services_synthetic"
+        / "source_system=fleet_services_synthetic"
         / f"dataset={Path(table_name).stem}"
-        / f"source_extract={source_file.parent.name if source_file.parent.name != 'element-fleet-services' else 'root'}"
+        / f"source_extract={source_file.parent.name if source_file.parent.name != 'fleet-services' else 'root'}"
         / f"ingest_date={ingest_dt.date().isoformat()}"
         / f"ingest_hour={ingest_dt.strftime('%H')}"
         / f"run_id={run_id}"

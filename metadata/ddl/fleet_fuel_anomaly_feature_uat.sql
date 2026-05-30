@@ -1,4 +1,4 @@
--- Element Fleet Services Fuel Anomaly Feature UAT.
+-- Fleet Services Fuel Anomaly Feature UAT.
 -- Run after:
 --   CALL FEATURES.BUILD_FEATURE_FUEL_ANOMALY_SCORE('2026-05-26');
 --

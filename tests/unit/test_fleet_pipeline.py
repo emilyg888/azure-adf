@@ -2,7 +2,7 @@ import csv
 import json
 from pathlib import Path
 
-from fabric.notebooks.element_fleet_pipeline_driver import run_element_fleet_pipeline
+from fabric.notebooks.fleet_pipeline_driver import run_fleet_pipeline
 from framework.conformed.scd_processor import merge_scd2_dimension
 from framework.ingestion.staging_processor import DatasetContract, process_dataset_to_staging
 
@@ -42,7 +42,7 @@ def test_staging_marks_latest_mutable_record(tmp_path):
         contract=contract,
         run_id="RUN_TEST",
         batch_date="2026-05-26",
-        source_system_id="SRC_ELEMENT_FLEET_SYNTH_001",
+        source_system_id="SRC_FLEET_SYNTH_001",
         ingest_timestamp="2026-05-26T01:00:00+00:00",
     )
 
@@ -87,7 +87,7 @@ def test_staging_quarantines_ambiguous_same_timestamp(tmp_path):
         contract=contract,
         run_id="RUN_TEST",
         batch_date="2026-05-26",
-        source_system_id="SRC_ELEMENT_FLEET_SYNTH_001",
+        source_system_id="SRC_FLEET_SYNTH_001",
         ingest_timestamp="2026-05-26T01:00:00+00:00",
     )
 
@@ -98,7 +98,7 @@ def test_staging_quarantines_ambiguous_same_timestamp(tmp_path):
     assert Path(result["rejected_path"]).is_file()
 
 
-def test_element_fleet_pipeline_uses_current_root_schema(tmp_path):
+def test_fleet_pipeline_uses_current_root_schema(tmp_path):
     source_root = tmp_path / "source"
     output_root = tmp_path / "out"
     source_root.mkdir()
@@ -137,7 +137,7 @@ def test_element_fleet_pipeline_uses_current_root_schema(tmp_path):
         ],
     )
 
-    result = run_element_fleet_pipeline(
+    result = run_fleet_pipeline(
         source_root=source_root,
         output_root=output_root,
         dataset_id="DS_FLEET_CLIENTS_001",
@@ -150,7 +150,7 @@ def test_element_fleet_pipeline_uses_current_root_schema(tmp_path):
     assert Path(result["staging_path"]).is_file()
 
 
-def test_element_fleet_pipeline_processes_manifest_delta(tmp_path):
+def test_fleet_pipeline_processes_manifest_delta(tmp_path):
     source_root = tmp_path / "source"
     delta_root = source_root / "delta_sources" / "2026-05-26"
     output_root = tmp_path / "out"
@@ -202,7 +202,7 @@ def test_element_fleet_pipeline_processes_manifest_delta(tmp_path):
         ],
     )
 
-    result = run_element_fleet_pipeline(
+    result = run_fleet_pipeline(
         source_root=source_root,
         output_root=output_root,
         dataset_id="DS_FLEET_CLIENTS_001",
@@ -261,7 +261,7 @@ def test_two_full_extract_days_drive_scd2_changes_and_soft_delete(tmp_path):
         ],
     )
 
-    day1_result = run_element_fleet_pipeline(
+    day1_result = run_fleet_pipeline(
         source_root=source_root,
         output_root=output_root,
         dataset_id="DS_FLEET_CLIENTS_001",
@@ -270,7 +270,7 @@ def test_two_full_extract_days_drive_scd2_changes_and_soft_delete(tmp_path):
         batch_date="2026-05-25",
         run_id="RUN_DAY1",
     )[0]
-    day2_result = run_element_fleet_pipeline(
+    day2_result = run_fleet_pipeline(
         source_root=source_root,
         output_root=output_root,
         dataset_id="DS_FLEET_CLIENTS_001",

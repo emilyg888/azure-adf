@@ -1,4 +1,4 @@
--- Element Fleet Services MVP Snowflake SQL.
+-- Fleet Services MVP Snowflake SQL.
 -- Python/Fabric prepares ADLS RAW and ADLS STAGING. Snowflake SQL owns deterministic
 -- warehouse modelling from STG_FLEET into CONFORMED.
 

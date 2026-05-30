@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This note compares three Snowflake patterns for updating SCD target tables in the Element Fleet Services MVP/SIT design.
+This note compares three Snowflake patterns for updating SCD target tables in the Fleet Services MVP/SIT design.
 
 The three implemented patterns are:
 
@@ -37,7 +37,7 @@ The default production pattern should be procedural SQL SCD merge for core dimen
 
 Do not use dynamic tables directly over external ADLS tables. Snowflake requires a supported internal source, so land external data into a controlled internal `STG_FLEET` history/load table first.
 
-## Element Fleet Recommendation
+## Fleet Recommendation
 
 | Dimension | Preferred production pattern | Reason |
 |---|---|---|

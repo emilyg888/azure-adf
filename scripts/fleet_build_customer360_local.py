@@ -1,7 +1,7 @@
 """Build a local Customer 360 identity-resolution snapshot from staged CSVs.
 
 This is a local verification harness for the Snowflake-first identity design.
-It uses the same two-day staged outputs produced by `element_fleet_pipeline_driver.py`
+It uses the same two-day staged outputs produced by `fleet_pipeline_driver.py`
 and writes CSV artifacts that mirror the Snowflake IDENTITY, GOLDEN, GOLD, and
 SEMANTIC layers.
 """
@@ -23,8 +23,8 @@ if str(ROOT) not in sys.path:
 from framework.conformed.scd_processor import merge_scd2_dimension
 
 
-DEFAULT_DAY1_ROOT = Path(".local/element_fleet_full_20260525")
-DEFAULT_DAY2_ROOT = Path(".local/element_fleet_full_20260526")
+DEFAULT_DAY1_ROOT = Path(".local/fleet_full_20260525")
+DEFAULT_DAY2_ROOT = Path(".local/fleet_full_20260526")
 DEFAULT_OUTPUT_ROOT = Path(".local/customer360_identity")
 
 

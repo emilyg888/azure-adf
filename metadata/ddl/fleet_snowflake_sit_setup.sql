@@ -1,4 +1,4 @@
--- Element Fleet Services MVP SIT setup for Snowflake.
+-- Fleet Services MVP SIT setup for Snowflake.
 -- Scope: STG_FLEET, CONFORMED, and AUDIT only.
 -- Phase-two GOLD, FEATURES, and SEMANTIC are intentionally excluded.
 
@@ -23,7 +23,7 @@ CREATE FILE FORMAT IF NOT EXISTS STG_FLEET.PARQUET_FF
   USE_VECTORIZED_SCANNER = TRUE;
 
 -- Create STG_FLEET.ADLS_STAGING_STAGE before running this script.
--- For SIT, use `scripts/element_fleet_create_sas_stage_sql.py` to generate a
+-- For SIT, use `scripts/fleet_create_sas_stage_sql.py` to generate a
 -- short-lived SAS-backed stage SQL file, then run it with Snowflake CLI.
 
 CREATE OR REPLACE EXTERNAL TABLE STG_FLEET.CLIENTS_EXT (

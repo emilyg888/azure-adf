@@ -1,4 +1,4 @@
-"""Snowpark job for Element Fleet fuel anomaly FEATURES output.
+"""Snowpark job for Fleet fuel anomaly FEATURES output.
 
 This job reads only Snowflake CONFORMED tables and writes the MVP feature
 output to FEATURES.FEATURE_FUEL_ANOMALY_SCORE. It intentionally stops at the

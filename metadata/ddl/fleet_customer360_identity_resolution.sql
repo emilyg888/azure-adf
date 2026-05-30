@@ -1,7 +1,7 @@
--- Element Fleet Customer 360 identity-resolution solution.
+-- Fleet Customer 360 identity-resolution solution.
 --
 -- Design source:
---   design/element_fleet_artefacts/element_fleet_customer360_identity_resolution_design_snowflake_first.md
+--   design/fleet_artefacts/fleet_customer360_identity_resolution_design_snowflake_first.md
 --
 -- Scope:
 --   Snowflake-first Customer 360 identity foundation over the existing Element
@@ -14,7 +14,7 @@
 --   * CONFORMED.DIM_CLIENT and CONFORMED.DIM_VEHICLE are the minimum required
 --     conformed sources.
 --   * ABN, address, domain, VIN, registration plate, telematics device, claims,
---     invoice, portal, and EV charging inputs are exposed by the Element Fleet
+--     invoice, portal, and EV charging inputs are exposed by the Fleet
 --     bb_datasets source metadata and are consumed by this identity layer once
 --     STG_FLEET and CONFORMED are rebuilt from the current source schema.
 --   * No trusted driver master is assumed. Driver data remains linked through

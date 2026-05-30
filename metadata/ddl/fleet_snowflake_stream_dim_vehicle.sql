@@ -1,5 +1,5 @@
--- Element Fleet Services Snowflake stream-based DIM_VEHICLE population.
--- Run after `element_fleet_snowflake_sit_setup.sql` has loaded DIM_CLIENT.
+-- Fleet Services Snowflake stream-based DIM_VEHICLE population.
+-- Run after `fleet_snowflake_sit_setup.sql` has loaded DIM_CLIENT.
 --
 -- Purpose:
 --   ADLS STAGING Parquet -> STG_FLEET.VEHICLES_EXT

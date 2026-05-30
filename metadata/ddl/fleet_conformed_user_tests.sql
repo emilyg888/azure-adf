@@ -1,5 +1,5 @@
--- Element Fleet Services CONFORMED layer user tests.
--- Run after `element_fleet_snowflake_sit_setup.sql` or the equivalent MVP load.
+-- Fleet Services CONFORMED layer user tests.
+-- Run after `fleet_snowflake_sit_setup.sql` or the equivalent MVP load.
 --
 -- Current SIT coverage: CONFORMED.DIM_CLIENT SCD Type 2 from the two full extracts.
 -- Expected source dates:

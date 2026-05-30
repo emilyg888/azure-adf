@@ -1,4 +1,4 @@
-"""Upload Element Fleet SIT files to ADLS Gen2."""
+"""Upload Fleet SIT files to ADLS Gen2."""
 
 from __future__ import annotations
 
@@ -13,11 +13,11 @@ from azure.storage.filedatalake import DataLakeServiceClient
 DEFAULT_ACCOUNT_URL = "https://emilygcovidreportingdl.dfs.core.windows.net/"
 DEFAULT_TENANT_ID = "4255f836-8ff1-4e78-a7b9-602e32708e78"
 DEFAULT_FILESYSTEM = "fabric-foundry-sit"
-DEFAULT_SOURCE_ROOT = Path(".local/element_fleet_sit_adls")
+DEFAULT_SOURCE_ROOT = Path(".local/fleet_sit_adls")
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Upload Element Fleet SIT files to ADLS.")
+    parser = argparse.ArgumentParser(description="Upload Fleet SIT files to ADLS.")
     parser.add_argument("--account-url", default=DEFAULT_ACCOUNT_URL)
     parser.add_argument("--tenant-id", default=DEFAULT_TENANT_ID)
     parser.add_argument("--filesystem", default=DEFAULT_FILESYSTEM)

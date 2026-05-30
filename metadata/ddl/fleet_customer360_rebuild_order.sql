@@ -1,23 +1,23 @@
--- Element Fleet Customer 360 rebuild order.
+-- Fleet Customer 360 rebuild order.
 --
 -- This file is the operational checklist for rebuilding the Snowflake layers
--- after uploading `.local/element_fleet_sit_adls/staging` to the ADLS stage.
+-- after uploading `.local/fleet_sit_adls/staging` to the ADLS stage.
 --
 -- Execute these SQL artifacts in order:
 --
--- 1. metadata/ddl/element_fleet_snowflake_sit_setup.sql
+-- 1. metadata/ddl/fleet_snowflake_sit_setup.sql
 --    Recreates STG_FLEET.CLIENTS_EXT, rebuilds CONFORMED.DIM_CLIENT from
 --    2026-05-25 and 2026-05-26 full extracts, and preserves ABN/domain/address.
 --
--- 2. metadata/ddl/element_fleet_snowflake_stream_dim_vehicle.sql
+-- 2. metadata/ddl/fleet_snowflake_stream_dim_vehicle.sql
 --    Recreates STG_FLEET.VEHICLES_EXT and rebuilds CONFORMED.DIM_VEHICLE from
 --    2026-05-25 and 2026-05-26 full extracts, preserving VIN/plate/device IDs.
 --
--- 3. metadata/ddl/element_fleet_snowflake_staging_identity_inputs.sql
+-- 3. metadata/ddl/fleet_snowflake_staging_identity_inputs.sql
 --    Rebuilds STG_FLEET transient inputs for leasing, fuel cards, telematics,
 --    maintenance, claims, invoices, portal events, and EV charging.
 --
--- 4. metadata/ddl/element_fleet_customer360_identity_resolution.sql
+-- 4. metadata/ddl/fleet_customer360_identity_resolution.sql
 --    Creates the IDENTITY, GOLDEN, GOLD, GOVERNANCE, and SEMANTIC objects plus
 --    the IDENTITY.BUILD_CUSTOMER360_IDENTITY procedure.
 --

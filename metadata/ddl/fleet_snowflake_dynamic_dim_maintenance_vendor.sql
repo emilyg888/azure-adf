@@ -1,5 +1,5 @@
--- Element Fleet Services dynamic-table-based DIM_MAINTENANCE_VENDOR population.
--- Run after `element_fleet_snowflake_sit_setup.sql` has created the ADLS stage
+-- Fleet Services dynamic-table-based DIM_MAINTENANCE_VENDOR population.
+-- Run after `fleet_snowflake_sit_setup.sql` has created the ADLS stage
 -- and file format in FLEET_MVP_SIT.
 --
 -- Purpose:

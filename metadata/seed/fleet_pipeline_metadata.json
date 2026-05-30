@@ -1,7 +1,7 @@
 {
-  "metadata_version": "element_fleet_mvp_0.1",
-  "source_system_id": "SRC_ELEMENT_FLEET_SYNTH_001",
-  "source_system_name": "Element Fleet Services Synthetic Dataset",
+  "metadata_version": "fleet_mvp_0.1",
+  "source_system_id": "SRC_FLEET_SYNTH_001",
+  "source_system_name": "Fleet Services Synthetic Dataset",
   "conformed_config": {
     "dimensions": {
       "clients.csv": {

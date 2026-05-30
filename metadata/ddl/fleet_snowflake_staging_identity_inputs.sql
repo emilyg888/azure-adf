@@ -1,6 +1,6 @@
--- Element Fleet Customer 360 staging inputs for Snowflake.
+-- Fleet Customer 360 staging inputs for Snowflake.
 --
--- Run after `element_fleet_snowflake_sit_setup.sql` has created
+-- Run after `fleet_snowflake_sit_setup.sql` has created
 -- STG_FLEET.ADLS_STAGING_STAGE and STG_FLEET.PARQUET_FF.
 --
 -- Purpose:
