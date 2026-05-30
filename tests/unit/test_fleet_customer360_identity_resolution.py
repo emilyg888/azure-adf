@@ -36,6 +36,7 @@ def test_customer360_identity_resolution_artifact_contains_required_layers():
     assert "CREATE TABLE IF NOT EXISTS GOVERNANCE.IDENTITY_REVIEW_QUEUE" in sql
     assert "CREATE TABLE IF NOT EXISTS GOLD.CUSTOMER_360_MART" in sql
     assert "CREATE OR REPLACE VIEW SEMANTIC.CUSTOMER_360" in sql
+    assert "CREATE OR REPLACE VIEW IDENTITY.GRAPH_ELIGIBLE_MATCH_DECISION" in sql
 
 
 def test_customer360_identity_resolution_includes_design_guardrails():
@@ -53,6 +54,46 @@ def test_customer360_identity_resolution_includes_design_guardrails():
     assert "DATA_QUALITY_STATUS = 'certified'" in sql
     assert ":RUN_ID AS CREATED_RUN_ID" in sql
     assert "COALESCE(:BATCH_DATE, CURRENT_DATE())" in sql
+    assert "FINAL_DECISION = 'MATCH'" in sql
+    assert "DECISION_STATUS IN ('AUTO_APPROVED', 'HUMAN_APPROVED')" in sql
+    assert "GRAPH_APPLY_STATUS = 'READY_TO_APPLY'" in sql
+
+
+def test_databricks_aligned_v1_matching_tables_exist():
+    sql = SQL_PATH.read_text(encoding="utf-8")
+
+    for table in [
+        "IDENTITY.CUSTOMER_MATCH_FEATURE",
+        "IDENTITY.VEHICLE_MATCH_FEATURE",
+        "IDENTITY.DEVICE_VEHICLE_MATCH_FEATURE",
+        "IDENTITY.ACCOUNT_CUSTOMER_MATCH_FEATURE",
+        "IDENTITY.CUSTOMER_MATCH_SCORE",
+        "IDENTITY.VEHICLE_MATCH_SCORE",
+        "IDENTITY.DEVICE_VEHICLE_MATCH_SCORE",
+        "IDENTITY.ACCOUNT_CUSTOMER_MATCH_SCORE",
+        "IDENTITY.CUSTOMER_MATCH_DECISION",
+        "IDENTITY.VEHICLE_MATCH_DECISION",
+        "IDENTITY.DEVICE_VEHICLE_MATCH_DECISION",
+        "IDENTITY.ACCOUNT_CUSTOMER_MATCH_DECISION",
+        "IDENTITY.MATCH_REVIEW_QUEUE",
+        "IDENTITY.MATCH_SCORING_RUN_AUDIT",
+        "IDENTITY.MATCH_THRESHOLD_POLICY",
+        "IDENTITY.MATCH_MODEL_REGISTRY_AUDIT",
+    ]:
+        assert f"CREATE TABLE IF NOT EXISTS {table}" in sql
+
+
+def test_databricks_aligned_v1_writeback_and_policy_controls_exist():
+    sql = SQL_PATH.read_text(encoding="utf-8")
+
+    assert "CREATE OR REPLACE PROCEDURE IDENTITY.MERGE_MATCH_SCORE_WRITEBACK" in sql
+    assert "CREATE OR REPLACE PROCEDURE IDENTITY.APPLY_MATCH_DECISION_POLICY" in sql
+    assert "CANDIDATE_PAIR_ID = S.CANDIDATE_PAIR_ID" in sql
+    assert "T.MODEL_VERSION = S.MODEL_VERSION" in sql
+    assert "T.SCORING_RUN_ID = S.SCORING_RUN_ID" in sql
+    assert "THRESHOLD_POLICY_VERSION" in sql
+    assert "WRITEBACK_BATCH_ID" in sql
+    assert "MLFLOW_RUN_ID" in sql
 
 
 def test_customer360_consumes_exposed_fleet_identity_columns():

@@ -1,0 +1,34 @@
+contract_id: vehicle_match_candidate_contract
+entity_type: VEHICLE
+source_table: IDENTITY.VEHICLE_MATCH_CANDIDATE
+candidate_key: CANDIDATE_ID
+feature_table: IDENTITY.VEHICLE_MATCH_FEATURE
+score_table: IDENTITY.VEHICLE_MATCH_SCORE
+decision_table: IDENTITY.VEHICLE_MATCH_DECISION
+writeback_staging_table: IDENTITY.STG_VEHICLE_MATCH_SCORE_WRITEBACK
+graph_impact: GOLDEN.XREF_VEHICLE_SOURCE
+threshold_policy: IDENTITY.MATCH_THRESHOLD_POLICY
+review_required: true
+allowed_decision_methods:
+  - hard_reject_rule
+  - hard_match_rule
+  - human_review
+  - ml_score_band
+required_columns:
+  - CANDIDATE_ID
+  - ENTITY_TYPE
+  - SOURCE_RECORD_A
+  - SOURCE_RECORD_B
+  - MATCH_SCORE
+  - MATCH_METHOD
+  - MATCH_REASON_CODE
+  - AUTO_MATCH_FLAG
+  - REVIEW_REQUIRED_FLAG
+  - CREATED_RUN_ID
+  - CREATED_AT
+feature_mapping:
+  source_record_similarity: VIN_OR_REGISTRATION_SIMILARITY
+  identifier_match: VIN_MATCH
+  ownership_overlap: OWNER_OVERLAP_SCORE
+  conflict_signal: CONFLICT_SCORE
+

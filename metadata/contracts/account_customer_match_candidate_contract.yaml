@@ -1,0 +1,35 @@
+contract_id: account_customer_match_candidate_contract
+entity_type: ACCOUNT_CUSTOMER
+source_table: IDENTITY.ACCOUNT_CUSTOMER_MATCH_CANDIDATE
+candidate_key: CANDIDATE_ID
+feature_table: IDENTITY.ACCOUNT_CUSTOMER_MATCH_FEATURE
+score_table: IDENTITY.ACCOUNT_CUSTOMER_MATCH_SCORE
+decision_table: IDENTITY.ACCOUNT_CUSTOMER_MATCH_DECISION
+writeback_staging_table: IDENTITY.STG_ACCOUNT_CUSTOMER_MATCH_SCORE_WRITEBACK
+graph_impact: GOLDEN.XREF_ACCOUNT_SOURCE
+threshold_policy: IDENTITY.MATCH_THRESHOLD_POLICY
+review_required: true
+relationship_confidence_problem: true
+allowed_decision_methods:
+  - hard_reject_rule
+  - hard_match_rule
+  - human_review
+  - ml_score_band
+required_columns:
+  - CANDIDATE_ID
+  - ENTITY_TYPE
+  - SOURCE_RECORD_A
+  - SOURCE_RECORD_B
+  - MATCH_SCORE
+  - MATCH_METHOD
+  - MATCH_REASON_CODE
+  - AUTO_MATCH_FLAG
+  - REVIEW_REQUIRED_FLAG
+  - CREATED_RUN_ID
+  - CREATED_AT
+feature_mapping:
+  account_customer_overlap: ACCOUNT_CUSTOMER_OVERLAP_SCORE
+  billing_recency: RECENCY_SCORE
+  source_trust: SOURCE_TRUST_SCORE
+  conflict_signal: CONFLICT_SCORE
+
