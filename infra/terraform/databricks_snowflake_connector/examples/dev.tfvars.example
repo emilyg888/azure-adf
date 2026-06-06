@@ -1,0 +1,25 @@
+databricks_profile = "fleet-dev-active"
+
+databricks_snowflake_secret_scope = "fleet-snowflake"
+databricks_secret_reader_group    = "users"
+databricks_cluster_policy_user_group = "users"
+
+snowflake_organization_name = "your_snowflake_org"
+snowflake_account_name      = "your_snowflake_account"
+snowflake_admin_user        = "your_iac_user"
+snowflake_admin_role        = "ACCOUNTADMIN"
+snowflake_authenticator     = "SNOWFLAKE_JWT"
+
+# Supply sensitive value through TF_VAR_snowflake_admin_private_key or CI secret injection.
+# snowflake_admin_private_key = "..."
+
+snowflake_database       = "FLEET_MVP_SIT"
+snowflake_identity_schema = "IDENTITY"
+snowflake_warehouse      = "FLEET_MVP_SIT_WH"
+snowflake_warehouse_size = "XSMALL"
+snowflake_connector_role = "FLEET_DATABRICKS_CONNECTOR_ROLE"
+snowflake_connector_user = ""
+manage_snowflake_foundation_objects = false
+
+enable_snowflake_ddl_deploy = false
+snowflake_cli_connection    = ""

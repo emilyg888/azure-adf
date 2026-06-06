@@ -1,0 +1,12 @@
+{
+  "cluster_type": {
+    "type": "fixed",
+    "value": "all-purpose"
+  },
+  "autotermination_minutes": {
+    "type": "range",
+    "minValue": 15,
+    "maxValue": 30,
+    "defaultValue": 20
+  }
+}
